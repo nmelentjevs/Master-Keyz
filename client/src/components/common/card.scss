@@ -1,6 +1,47 @@
 .item-grid {
-  display: inline-block;
-  margin: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.item {
+  padding: 10px;
+  height: 500px;
+  min-width: 200px;
   border: 2px solid black;
+  margin: 5px;
+}
+
+.cart {
+  width: 100%;
+  display: block;
+  height: 200px;
+  border: 2px solid black;
+  margin: 5px;
+  padding: 10px;
+}
+
+.basket {
+  text-align: center;
+}
+
+.basket-grid {
+  display: grid;
+  grid-gap: 10px;
   grid-template-columns: 1fr 1fr 1fr;
+
+  height: 200px;
+}
+
+.basket-item {
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
+
+.basket-item button {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
 }

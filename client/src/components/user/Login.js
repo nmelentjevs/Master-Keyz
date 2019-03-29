@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser, registerUser, googleAuth } from '../../actions/authActions';
 import { GoogleLogin } from 'react-google-login';
-import { googleClientID, googleClientSecret } from '../../config/googleKeys';
+import { googleClientID } from '../../config/googleKeys';
 
 class Login extends Component {
   constructor() {
@@ -44,12 +44,14 @@ class Login extends Component {
   render() {
     const responseGoogle = response => {
       const { email, name, googleId } = response.profileObj;
+      const { history } = this.props;
       const newUser = {
         email,
         name,
         googleId
       };
       this.props.registerUser(newUser);
+      this.props.loginUser(newUser, history);
       this.props.history.push('/');
     };
 

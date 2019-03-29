@@ -8,3 +8,5 @@ export const EDIT_BASKET = 'EDIT_BASKET';
 export const PAY = 'PAY';
 export const ITEMS_LOADING = 'ITEMS_LOADING';
 export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
+export const PLUS_TOTAL = 'PLUS_TOTAL';
+export const MINUS_TOTAL = 'MINUS_TOTAL';

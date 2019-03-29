@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 // import Collection from './landing-components/Collection';
 // import Gallery from './landing-components/Gallery';
 // import { Link } from 'react-router-dom';
-import Items from '../common/Items';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser, clearCurrentProfile } from '../../actions/authActions';
 import { getItems } from '../../actions/itemsActions';
+
+import Items from '../common/Items';
+import Cart from '../../components/layout/Cart';
 
 class Landing extends Component {
   constructor(props) {
@@ -39,18 +41,12 @@ class Landing extends Component {
     return (
       <div>
         <h1>Hello</h1>
-        <a href="/login" onClick={this.getItems} className="nav-link">
-          <img
-            alt="GET_ITEMS"
-            className="rounded-circle"
-            style={{
-              width: '25px',
-              marginRight: '5px'
-            }}
-          />{' '}
+        <a href="/login" className="nav-link">
+          <button onClick={this.getItems}>Get Items</button>
           <button onClick={this.onLogoutClick}> Logout </button>
         </a>
-        <Items items={items} />;
+        <Items items={items} />
+        <Cart />
       </div>
     );
   }

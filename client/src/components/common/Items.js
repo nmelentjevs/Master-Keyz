@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './card.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getItems, setItemsLoading } from '../../actions/itemsActions';
+import { getItems } from '../../actions/itemsActions';
 
 import Spinner from './Spinner';
 import Item from './Item';
@@ -15,15 +15,16 @@ class Items extends Component {
       itemContent = <Spinner />;
     } else {
       itemContent = (
-        <div>
+        <div className="item-grid">
           {items.map(item => {
             return (
-              <div key={item._id} className="item-grid">
+              <div key={item._id} className="item">
                 <Item
                   name={item.name}
                   artist={item.artist}
                   category={item.category}
                   price={item.price}
+                  id={item._id}
                 />
               </div>
             );
