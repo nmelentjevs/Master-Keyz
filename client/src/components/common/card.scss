@@ -1,0 +1,6 @@
+.item-grid {
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid black;
+  grid-template-columns: 1fr 1fr 1fr;
+}
