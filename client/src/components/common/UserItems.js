@@ -8,6 +8,12 @@ import Spinner from './Spinner';
 import Item from './Item';
 
 class UserItems extends Component {
+  constructor() {
+    super();
+    this.state = {
+      dropdown: false
+    };
+  }
   componentDidMount = () => {
     this.props.getCurrentUserItems();
   };
@@ -18,8 +24,9 @@ class UserItems extends Component {
       .map(e => e.item['name'])
       .map((e, i, final) => final.indexOf(e) === i && i)
       .filter(e => purchased[e])
-      .map(e => purchased[e]);
-    console.log(unique);
+      .map(e => purchased[e])
+      .reverse();
+
     let itemContent;
     if (purchased == null || loading) {
       itemContent = <Spinner />;

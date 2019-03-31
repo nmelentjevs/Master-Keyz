@@ -55,7 +55,7 @@ class Item extends Component {
         )}
         {this.props.type === 'add' ? (
           <button className="add-button" onClick={() => this.addToBasket()}>
-            Add Item
+            Purchase
           </button>
         ) : null}
       </div>

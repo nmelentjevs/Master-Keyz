@@ -20,6 +20,10 @@ const ItemsSchema = new Schema({
   },
   imageURL: {
     type: String
+  },
+  createDate: {
+    type: Date,
+    default: Date.now
   }
 });
 

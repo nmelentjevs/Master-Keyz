@@ -30,7 +30,6 @@ router.get('/:email', (req, res) => {
       user[0].items.forEach(item => {
         itemsData.unshift(item);
       });
-      console.log(itemsData);
       res.json(itemsData);
     })
     .catch(err => res.status(404).json({ items: 'There are no items' }));

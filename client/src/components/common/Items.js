@@ -6,30 +6,123 @@ import { getItems } from '../../actions/itemsActions';
 
 import Spinner from './Spinner';
 import Item from './Item';
+import SelectList from './SelectList';
 
 class Items extends Component {
+  constructor() {
+    super();
+    this.state = {
+      categoryFilter: 'All',
+      otherFilter: 'Recent'
+    };
+  }
+  onCategoryChange = e => {
+    this.setState({ categoryFilter: e.target.value });
+  };
+  onOtherChange = e => {
+    this.setState({ otherFilter: e.target.value });
+  };
+
+  componentDidMount() {}
   render() {
     const { items, loading } = this.props.items;
+    const { errors } = this.props;
+    const { categoryFilter, otherFilter } = this.state;
     let itemContent;
+    const categoryOptions = [
+      {
+        label: 'All',
+        value: 'All'
+      }
+    ];
+    const options = [
+      {
+        label: 'Recent',
+        value: 'Recent'
+      },
+      {
+        label: 'Price',
+        value: 'Price'
+      },
+      {
+        label: 'Popular',
+        value: 'Popular'
+      }
+    ];
+
+    items.forEach(item => {
+      categoryOptions.push({ label: item.category, value: item.category });
+    });
+
+    const filteredItems = items.filter(item => {
+      return item.category === categoryFilter;
+    });
+
+    const priceFiltered = [...items].sort(
+      (a, b) => parseFloat(a.price) - parseFloat(b.price)
+    );
+
+    const uniqueCategory = categoryOptions
+      .map(e => e['label'])
+      .map((e, i, final) => final.indexOf(e) === i && i)
+      .filter(e => categoryOptions[e])
+      .map(e => categoryOptions[e]);
+
+    uniqueCategory.sort(function(a, b) {
+      var textA = a.label.toUpperCase();
+      var textB = b.label.toUpperCase();
+      return textA < textB ? -1 : textA > textB ? 1 : 0;
+    });
+
     if (items == null || loading) {
       itemContent = <Spinner />;
     } else {
       itemContent = (
-        <div className="item-grid">
-          {items.map(item => {
-            return (
-              <div key={item._id} className="item">
-                <Item
-                  name={item.name}
-                  artist={item.artist}
-                  category={item.category}
-                  price={item.price}
-                  id={item._id}
-                  type={'add'}
-                />
-              </div>
-            );
-          })}
+        <div>
+          {' '}
+          <SelectList
+            placeholder="Status"
+            name="status"
+            value={categoryFilter}
+            onChange={this.onCategoryChange}
+            options={uniqueCategory}
+            error={errors.status}
+            info="Give us an idea of where you are at in your career"
+          />
+          <SelectList
+            placeholder="Status"
+            name="status"
+            onChange={this.onOtherChange}
+            options={options}
+            error={errors.status}
+            value={otherFilter}
+            info="Give us an idea of where you are at in your career"
+          />
+          <div className="item-grid">
+            {(categoryFilter === 'All'
+              ? otherFilter === 'Recent'
+                ? items.reverse()
+                : otherFilter === 'Price'
+                ? priceFiltered
+                : items
+              : otherFilter === 'Popular'
+              ? filteredItems.reverse()
+              : filteredItems
+            ).map(item => {
+              return (
+                <div key={item._id} className="item">
+                  <Item
+                    name={item.name}
+                    artist={item.artist}
+                    category={item.category}
+                    price={item.price}
+                    id={item._id}
+                    type={'add'}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       );
     }
