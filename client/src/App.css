@@ -71,17 +71,21 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-align: center;
 }
 
 .nav-list-items {
   display: flex;
   align-items: center;
+  justify-content: center;
+  vertical-align: middle;
 }
 
 .nav-list-item {
   margin-right: 1.5rem;
   list-style: none;
   padding: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .nav-list-item a {
@@ -132,7 +136,7 @@ button {
   background: goldenrod;
 }
 
-button:hover {
+.add-button:hover {
   color: goldenrod;
   background: white;
 }

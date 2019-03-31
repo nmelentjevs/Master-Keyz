@@ -62,37 +62,55 @@ router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  // Find user by email
-  User.findOne({ email }).then(user => {
-    //Check for user
-    if (!user) {
-      return res.status(404).json({ email: 'User not found' });
-    }
-
-    // Check Password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User Matched
-        // Create JWT Payload
-        const payload = { id: user.id, name: user.name, email: user.email };
-
-        // Sign Token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          { expiresIn: 3600 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: 'Bearer ' + token
-            });
-          }
-        );
-      } else {
-        res.status(400).json({ password: 'Incorrect password' });
+  if (req.body.googleId) {
+    User.findOne({ email }).then(user => {
+      //Check for user
+      if (!user) {
+        return res.status(404).json({ email: 'User not found' });
       }
+      const payload = { id: user.googleId, name: user.name, email: user.email };
+
+      // Sign Token
+      jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+        res.json({
+          success: true,
+          token: 'Bearer ' + token
+        });
+      });
     });
-  });
+  } else {
+    User.findOne({ email }).then(user => {
+      //Check for user
+      if (!user) {
+        return res.status(404).json({ email: 'User not found' });
+      }
+
+      // Check Password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          // User Matched
+          // Create JWT Payload
+          const payload = { id: user.id, name: user.name, email: user.email };
+
+          // Sign Token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 3600 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: 'Bearer ' + token
+              });
+            }
+          );
+        } else {
+          res.status(400).json({ password: 'Incorrect password' });
+        }
+      });
+    });
+  }
+  // Find user by email
 });
 
 //  @route POST api/users/current

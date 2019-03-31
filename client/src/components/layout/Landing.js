@@ -8,15 +8,8 @@ import { logoutUser, clearCurrentProfile } from '../../actions/authActions';
 import { getItems } from '../../actions/itemsActions';
 
 import Items from '../common/Items';
-import Cart from '../../components/layout/Cart';
 
 class Landing extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: {}
-    };
-  }
   getItems = e => {
     e.preventDefault();
     this.props.getItems();
@@ -31,22 +24,11 @@ class Landing extends Component {
     this.props.getItems();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.items) {
-      this.setState({ items: this.props.items });
-    }
-  }
   render() {
     const { items } = this.props.items;
     return (
       <div>
-        <h1>Hello</h1>
-        <a href="/login" className="nav-link">
-          <button onClick={this.getItems}>Get Items</button>
-          <button onClick={this.onLogoutClick}> Logout </button>
-        </a>
         <Items items={items} />
-        <Cart />
       </div>
     );
   }

@@ -19,6 +19,7 @@ import Landing from './components/layout/Landing';
 import Footer from './components/layout/Footer';
 import Login from './components/user/Login';
 import Register from './components/user/Register';
+import Account from './components/layout/Account';
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -55,6 +56,7 @@ class App extends Component {
                 component={Login}
                 keys={(googleClientID, googleClientSecret)}
               />
+              <Route exact path="/account" component={Account} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/" component={Landing} />
               <Footer />

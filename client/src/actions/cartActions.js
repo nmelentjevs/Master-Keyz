@@ -1,32 +1,26 @@
-import axios from 'axios';
 import {
   DELETE_FROM_BASKET,
   ADD_TO_BASKET,
   GET_ERRORS,
   ITEMS_LOADING,
-  PLUS_TOTAL,
-  MINUS_TOTAL
+  CLEAR_CART,
+  RESET
 } from './types';
 
 export const addItem = item => dispatch => {
   dispatch({
     type: ADD_TO_BASKET,
-    payload: item
+    payload: { item, price: item.price }
   });
   dispatch({
-    type: PLUS_TOTAL,
-    payload: item.price
+    type: RESET
   });
 };
 
 export const deleteItem = (id, price) => dispatch => {
   dispatch({
     type: DELETE_FROM_BASKET,
-    payload: id
-  });
-  dispatch({
-    type: MINUS_TOTAL,
-    payload: price
+    payload: { id, price }
   });
 };
 
@@ -51,17 +45,9 @@ export const errorAdding = error => dispatch => {
   });
 };
 
-export const pay = (total, basket) => dispatch => {
-  const payData = {
-    total,
-    basket
-  };
-  axios
-    .post('/pay', payData)
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+export const clearCart = () => dispatch => {
+  dispatch({
+    type: CLEAR_CART,
+    payload: {}
+  });
 };

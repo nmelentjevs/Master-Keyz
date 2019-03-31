@@ -24,7 +24,6 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 export const loginUser = (userData, history) => dispatch => {
-  console.log(userData);
   axios
     .post('/api/users/login', userData)
     .then(res => {

@@ -13,13 +13,13 @@ const pay = require('./routes/api/pay');
 // DB Config
 const db = require('./config/keys').MongoURI;
 
+const app = express();
+
 // Connect to Mongo
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
-
-const app = express();
 
 // Passport config
 require('./config/passport')(passport);
@@ -49,6 +49,19 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  next();
+});
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Origin',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+    return res.status(200).json({});
+  }
   next();
 });
 

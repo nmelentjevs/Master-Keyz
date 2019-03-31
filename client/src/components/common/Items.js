@@ -25,6 +25,7 @@ class Items extends Component {
                   category={item.category}
                   price={item.price}
                   id={item._id}
+                  type={'add'}
                 />
               </div>
             );

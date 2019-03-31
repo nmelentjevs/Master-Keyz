@@ -1,8 +1,7 @@
 import {
   ADD_TO_BASKET,
   DELETE_FROM_BASKET,
-  PLUS_TOTAL,
-  MINUS_TOTAL
+  CLEAR_CART
 } from '../actions/types';
 
 const initialState = {
@@ -15,22 +14,24 @@ export default function(state = initialState, action) {
     case ADD_TO_BASKET:
       return {
         ...state,
-        basket: [...state.basket, action.payload]
+        basket: [...state.basket, action.payload.item],
+        total: (
+          parseFloat(state.total) + parseFloat(action.payload.price)
+        ).toFixed(2)
       };
     case DELETE_FROM_BASKET:
       return {
         ...state,
-        basket: state.basket.filter(items => items.id !== action.payload)
+        basket: state.basket.filter(items => items.id !== action.payload.id),
+        total: (
+          parseFloat(state.total) - parseFloat(action.payload.price)
+        ).toFixed(2)
       };
-    case PLUS_TOTAL:
+    case CLEAR_CART:
       return {
         ...state,
-        total: (parseFloat(state.total) + parseFloat(action.payload)).toFixed(2)
-      };
-    case MINUS_TOTAL:
-      return {
-        ...state,
-        total: (parseFloat(state.total) - parseFloat(action.payload)).toFixed(2)
+        basket: [],
+        total: 0.0
       };
     default:
       return state;

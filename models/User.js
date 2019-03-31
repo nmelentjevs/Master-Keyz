@@ -2,10 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  items: {
-    type: Schema.Types.ObjectId,
-    ref: 'items'
-  },
+  items: [
+    {
+      item: {
+        type: Object
+      },
+      purchaseDate: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ],
   name: {
     type: String
   },

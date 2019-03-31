@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import './navbar.scss';
+
+import Cart from './Cart';
+
 class Navbar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      showDropdown: false
+    };
+  }
+
+  expand = () => {
+    this.setState({ showDropdown: true });
+    document.getElementById('myDropdown').classList.toggle('show');
+  };
+  collapse = () => {
+    this.setState({ showDropdown: false });
+    document.getElementById('myDropdown').classList.remove('show');
+  };
+
   render() {
+    const { isAuthenticated } = this.props.auth;
+    const { basket } = this.props.cart;
     return (
       <div>
         <nav>
@@ -10,32 +35,60 @@ class Navbar extends Component {
             <Link to="/" style={{ textDecoration: 'none' }}>
               <div className="nav-logo">
                 <span> MK </span>{' '}
-                <i
-                  className="fa fa-key"
-                  style={{
-                    fontSize: '30px',
-                    transform: 'rotate(-45deg)'
-                  }}
-                />
               </div>
             </Link>
             <div className="nav-items">
               <ul className="nav-list-items">
                 <li className="nav-list-item">
-                  <Link to="/Collection">Collection</Link>
+                  <Link to="/collection">Collection</Link>
                 </li>
                 <li className="nav-list-item">
-                  <Link to="/Gallery">Gallery</Link>
+                  <Link to="/about">About</Link>
                 </li>
                 <li className="nav-list-item">
-                  <Link to="/About">About</Link>
+                  <Link to="/contact">Contact</Link>
                 </li>
+                {isAuthenticated ? null : (
+                  <li className="nav-list-item">
+                    <Link to="/login">Login</Link>
+                  </li>
+                )}
                 <li className="nav-list-item">
-                  <Link to="/Contact">Contact</Link>
+                  <Link to="/account">
+                    <i
+                      className="far fa-user"
+                      style={{
+                        color: 'white',
+                        fontSize: '1.2rem'
+                      }}
+                    />
+                  </Link>
                 </li>
-                <li className="nav-list-item">
-                  <Link to="/Login">Login</Link>
-                </li>
+
+                <div className="dropdown">
+                  <button onClick={this.expand} className="dropicon">
+                    <div id="cart">
+                      <span
+                        className="p1 fa-stack has-badge"
+                        data-count={basket.length}
+                      >
+                        <i
+                          className="far fa-credit-card"
+                          style={{ color: 'white', fontSize: '1.3rem' }}
+                        />
+                      </span>
+                    </div>
+                  </button>
+
+                  <div
+                    id="myDropdown"
+                    className="dropdown-content"
+                    onBlur={this.collapse}
+                    tabIndex="0"
+                  >
+                    <Cart />
+                  </div>
+                </div>
               </ul>
             </div>
           </div>
@@ -45,4 +98,14 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired,
+  cart: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({ auth: state.auth, cart: state.cart });
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Navbar);

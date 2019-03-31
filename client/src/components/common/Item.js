@@ -3,7 +3,9 @@ import './card.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addItem, errorAdding } from '../../actions/cartActions';
+import { setButtonLoading } from '../../actions/paymentActions';
 import isEmpty from '../../validation/is-empty';
+import Moment from 'react-moment';
 
 class Item extends Component {
   constructor() {
@@ -12,12 +14,14 @@ class Item extends Component {
       errors: {}
     };
   }
-  addToBasket = (id, price) => {
+
+  addToBasket = () => {
     const { basket } = this.props.cart;
     const newBasketItem = {
       name: this.props.name,
       artist: this.props.artist,
       price: this.props.price,
+      category: this.props.category,
       id: this.props.id
     };
     if (isEmpty(basket)) {
@@ -36,14 +40,24 @@ class Item extends Component {
   };
 
   render() {
-    const { name, artist, category, price, _id } = this.props;
+    const { name, artist, category, price } = this.props;
+    const { purchaseDate } = this.props;
     return (
       <div>
         <h1>{name}</h1>
         <h1>{artist}</h1>
         <h1>{category}</h1>
-        <h1>{price}</h1>
-        <button onClick={() => this.addToBasket(_id)}>Add Item</button>
+        <h1>{price}£</h1>
+        {purchaseDate === undefined ? null : (
+          <h3>
+            Purchased on: <Moment format="YYYY/MM/DD">{purchaseDate}</Moment>
+          </h3>
+        )}
+        {this.props.type === 'add' ? (
+          <button className="add-button" onClick={() => this.addToBasket()}>
+            Add Item
+          </button>
+        ) : null}
       </div>
     );
   }
@@ -65,5 +79,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addItem, errorAdding }
+  { addItem, errorAdding, setButtonLoading }
 )(Item);

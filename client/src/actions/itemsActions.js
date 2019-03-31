@@ -1,12 +1,5 @@
 import axios from 'axios';
-import {
-  GET_ITEMS,
-  // DELETE_FROM_BASKET,
-  // ADD_TO_BASKET,
-  // EDIT_BASKET,
-  GET_ERRORS,
-  ITEMS_LOADING
-} from './types';
+import { GET_ITEMS, GET_ERRORS, ITEMS_LOADING, GET_USER_ITEMS } from './types';
 
 export const getItems = () => dispatch => {
   dispatch(setItemsLoading());
@@ -24,6 +17,32 @@ export const getItems = () => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+export const getCurrentUserItems = email => dispatch => {
+  dispatch(setItemsLoading());
+  axios
+    .get(`/api/items/${email}`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: GET_USER_ITEMS,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const addItems = data => {
+  axios
+    .post('/api/items/add', data)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
 };
 
 // Set loading state
