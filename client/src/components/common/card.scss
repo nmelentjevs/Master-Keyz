@@ -21,7 +21,7 @@
 .item {
   padding: 10px;
   max-width: 320px;
-  height: 193px;
+  height: 200px;
   margin: 1px;
   background: white;
   grid-row: span 1;
@@ -49,6 +49,11 @@
   letter-spacing: normal;
   text-align: left;
   color: #000000;
+}
+
+.item-category {
+  display: inline-block;
+  font-size: 0.9rem;
 }
 
 .cart {
@@ -200,4 +205,179 @@ option {
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
+}
+
+.panel .pad {
+  padding: 0 15px;
+}
+.panel.flip .action {
+  display: none;
+}
+
+.panel {
+  width: inherit;
+  height: inherit;
+  margin: 1px;
+  position: relative;
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  text-align: center;
+}
+.panel .front {
+  z-index: 900;
+  background: #fff;
+
+  -webkit-transform: rotateX(0deg) rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+
+  -moz-transform: rotateX(0deg) rotateY(0deg);
+  -moz-transform-style: preserve-3d;
+  -moz-backface-visibility: hidden;
+
+  -o-transform: rotateX(0deg) rotateY(0deg);
+  -o-transform-style: preserve-3d;
+  -o-backface-visibility: hidden;
+
+  -ms-transform: rotateX(0deg) rotateY(0deg);
+  -ms-transform-style: preserve-3d;
+  -ms-backface-visibility: hidden;
+
+  transform: rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  -o-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.panel.flip .front {
+  z-index: 900;
+  background: #fff;
+
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.panel .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 800;
+  width: inherit;
+  height: inherit;
+  background: #fff;
+  border: 1px solid #000;
+  -webkit-transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+
+  -moz-transform: rotateY(-180deg);
+  -moz-transform-style: preserve-3d;
+  -moz-backface-visibility: hidden;
+
+  -o-transform: rotateY(-180deg);
+  -o-transform-style: preserve-3d;
+  -o-backface-visibility: hidden;
+
+  -ms-transform: rotateY(-180deg);
+  -ms-transform-style: preserve-3d;
+  -ms-backface-visibility: hidden;
+
+  transform: rotateY(-180deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  -o-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.panel.flip .back {
+  z-index: 1000;
+  background: peachpuff;
+  height: 100%;
+  -webkit-transform: rotateX(0deg) rotateY(0deg);
+  -moz-transform: rotateX(0deg) rotateY(0deg);
+  -ms-transform: rotateX(0deg) rotateY(0deg);
+  -o-transform: rotateX(0deg) rotateY(0deg);
+  transform: rotateX(0deg) rotateY(0deg);
+}
+
+.frontTitle {
+  padding-top: 5px;
+  text-align: center;
+  font-family: 'latoregular', arial;
+  font-size: 18px;
+  color: #000;
+  height: 45px;
+}
+
+.frontLogo {
+  width: 100%;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.boisedigital {
+  background-size: 85% auto;
+  background-position: center center;
+}
+
+.dissolve {
+  background-size: 125px 125px;
+}
+
+.frontLocation {
+  padding-top: 10px;
+  text-align: center;
+  color: #aaa;
+  font-family: 'latoregular', arial;
+  font-size: 18px;
+}
+
+.backTitle {
+  padding: 10px;
+  color: #000;
+  font-family: 'latohairline', arial;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.backParagraph {
+  padding: 10px;
+  padding-top: 0;
+  color: #000;
+  font-family: 'latoregular', arial;
+  font-size: 14px;
+}
+
+.backGoto {
+  padding: 10px;
+  padding-top: 0;
+  color: #06f;
+  font-family: 'latoregular', arial;
+  font-size: 14px;
+}
+
+.backGoto a {
+  text-decoration: none;
+  color: #06f;
+  -webkit-transition: 0.1s all linear;
+  -moz-transition: 0.1s all linear;
+  -o-transition: 0.1s all linear;
+  transition: 0.1s all linear;
+}
+
+.backGoto a:hover {
+  text-decoration: underline;
+  padding-left: 15px;
 }

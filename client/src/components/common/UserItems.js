@@ -43,6 +43,7 @@ class UserItems extends Component {
                   price={item.item.price}
                   purchaseDate={item.purchaseDate}
                   id={item.item.id}
+                  property={'user'}
                 />
               </div>
             );

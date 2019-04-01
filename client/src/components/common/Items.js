@@ -13,14 +13,14 @@ class Items extends Component {
     super();
     this.state = {
       categoryFilter: 'All',
-      otherFilter: 'Recent'
+      otherFilter: 'Popular'
     };
   }
   onCategoryChange = e => {
     this.setState({ categoryFilter: e.target.value });
   };
   onOtherChange = e => {
-    this.setState({ otherFilter: e.target.value });
+    this.setState({ otherFilter: e.target.value, ready: 1 });
   };
 
   componentDidMount() {}
@@ -115,7 +115,7 @@ class Items extends Component {
             ).map(item => {
               return (
                 <div className="item-wrap" key={item._id}>
-                  <div key={item._id} className="item">
+                  <div key={item._id} className="item hover panel">
                     <Item
                       name={item.name}
                       artist={item.artist}
@@ -123,6 +123,7 @@ class Items extends Component {
                       price={item.price}
                       id={item._id}
                       type={'add'}
+                      property={'collection'}
                     />
                   </div>
                 </div>

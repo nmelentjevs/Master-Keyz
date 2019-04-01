@@ -55,22 +55,24 @@ class Navbar extends Component {
                 <li className="nav-list-item">
                   <Link to="/contact">Contact</Link>
                 </li>
-                {isAuthenticated ? null : (
+                {isAuthenticated ? (
+                  <li className="nav-list-item card-icon">
+                    <Link to="/account">
+                      <i
+                        className="far fa-user"
+                        style={{
+                          color: 'white',
+                          fontSize: '1.2rem'
+                        }}
+                      />
+                    </Link>
+                  </li>
+                ) : (
                   <li className="nav-list-item">
                     <Link to="/login">Login</Link>
                   </li>
                 )}
-                <li className="nav-list-item card-icon">
-                  <Link to="/account">
-                    <i
-                      className="far fa-user"
-                      style={{
-                        color: 'white',
-                        fontSize: '1.2rem'
-                      }}
-                    />
-                  </Link>
-                </li>
+
                 <li>
                   <div className="dropdown">
                     <button onClick={this.expand} className="dropicon">
