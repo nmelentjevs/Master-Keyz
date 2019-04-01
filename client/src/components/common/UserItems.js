@@ -32,7 +32,7 @@ class UserItems extends Component {
       itemContent = <Spinner />;
     } else {
       itemContent = (
-        <div className="item-grid">
+        <div className="items-grid">
           {unique.map(item => {
             return (
               <div key={item._id} className="item">

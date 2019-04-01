@@ -78,27 +78,31 @@ class Items extends Component {
       itemContent = <Spinner />;
     } else {
       itemContent = (
-        <div>
+        <div className="collection-items-wrapper">
           {' '}
-          <SelectList
-            placeholder="Status"
-            name="status"
-            value={categoryFilter}
-            onChange={this.onCategoryChange}
-            options={uniqueCategory}
-            error={errors.status}
-            info="Give us an idea of where you are at in your career"
-          />
-          <SelectList
-            placeholder="Status"
-            name="status"
-            onChange={this.onOtherChange}
-            options={options}
-            error={errors.status}
-            value={otherFilter}
-            info="Give us an idea of where you are at in your career"
-          />
-          <div className="item-grid">
+          <div className="select-list">
+            <div className="select-list-item">
+              <SelectList
+                placeholder="Status"
+                name="status"
+                value={categoryFilter}
+                onChange={this.onCategoryChange}
+                options={uniqueCategory}
+                error={errors.status}
+              />
+            </div>
+            <div className="select-list-item">
+              <SelectList
+                placeholder="Status"
+                name="status"
+                onChange={this.onOtherChange}
+                options={options}
+                error={errors.status}
+                value={otherFilter}
+              />
+            </div>
+          </div>
+          <div className="items-grid">
             {(categoryFilter === 'All'
               ? otherFilter === 'Recent'
                 ? items.reverse()
@@ -110,15 +114,17 @@ class Items extends Component {
               : filteredItems
             ).map(item => {
               return (
-                <div key={item._id} className="item">
-                  <Item
-                    name={item.name}
-                    artist={item.artist}
-                    category={item.category}
-                    price={item.price}
-                    id={item._id}
-                    type={'add'}
-                  />
+                <div className="item-wrap" key={item._id}>
+                  <div key={item._id} className="item">
+                    <Item
+                      name={item.name}
+                      artist={item.artist}
+                      category={item.category}
+                      price={item.price}
+                      id={item._id}
+                      type={'add'}
+                    />
+                  </div>
                 </div>
               );
             })}

@@ -30,6 +30,7 @@ class Cart extends Component {
     };
     this.props.paymentAccepted(payment);
     this.props.addItems(userItems);
+    this.props.history.push('/thankyou');
   };
 
   onCancel = data => {
@@ -48,6 +49,10 @@ class Cart extends Component {
     };
     const { basket, total } = this.props.cart;
     const { loading } = this.props.paid;
+    const redirect_urls = {
+      return_url: 'http://localhost:3000/pay/thankyou',
+      cancel_url: 'http://localhost:3000/pay/cancel'
+    };
     parseFloat(total).toFixed(2);
     return (
       <div className="basket">
@@ -81,6 +86,7 @@ class Cart extends Component {
                 onError={this.onError}
                 onSuccess={this.onSuccess}
                 onCancel={this.onCancel}
+                redirect_urls={redirect_urls}
               />
             )}
           </div>

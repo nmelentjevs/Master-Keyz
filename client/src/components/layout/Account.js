@@ -6,25 +6,15 @@ import UserItems from '../common/UserItems';
 import { getCurrentUserItems } from '../../actions/itemsActions';
 
 class Account extends Component {
-  // TODO
-  // RENDER PURCHASED ITEMS FROM DATABASE
-  // MAKE REPEATED ITEMS NOT APPEAR IN DATABASE
-
-  getUserItems = email => {
-    this.props.getCurrentUserItems(email);
-  };
-
   componentDidMount() {
     this.props.getCurrentUserItems(this.props.auth.user.email);
   }
 
   render() {
-    const { email } = this.props.auth.user;
     const { userItems } = this.props.items.purchased;
     return (
       <div>
         <UserItems items={userItems} />
-        <button onClick={() => this.getUserItems(email)}>Click me</button>
       </div>
     );
   }

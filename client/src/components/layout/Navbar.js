@@ -31,6 +31,13 @@ class Navbar extends Component {
     return (
       <div>
         <nav>
+          <label
+            htmlFor="toggle"
+            style={{ color: 'white', fontSize: '1.5rem' }}
+          >
+            &#9776;
+          </label>
+          <input type="checkbox" id="toggle" />
           <div className="navbar container">
             <Link to="/" style={{ textDecoration: 'none' }}>
               <div className="nav-logo">
@@ -53,7 +60,7 @@ class Navbar extends Component {
                     <Link to="/login">Login</Link>
                   </li>
                 )}
-                <li className="nav-list-item">
+                <li className="nav-list-item card-icon">
                   <Link to="/account">
                     <i
                       className="far fa-user"
@@ -64,31 +71,32 @@ class Navbar extends Component {
                     />
                   </Link>
                 </li>
+                <li>
+                  <div className="dropdown">
+                    <button onClick={this.expand} className="dropicon">
+                      <div id="cart">
+                        <span
+                          className="p1 fa-stack has-badge"
+                          data-count={basket.length}
+                        >
+                          <i
+                            className="far fa-credit-card"
+                            style={{ color: 'white', fontSize: '1.3rem' }}
+                          />
+                        </span>
+                      </div>
+                    </button>
 
-                <div className="dropdown">
-                  <button onClick={this.expand} className="dropicon">
-                    <div id="cart">
-                      <span
-                        className="p1 fa-stack has-badge"
-                        data-count={basket.length}
-                      >
-                        <i
-                          className="far fa-credit-card"
-                          style={{ color: 'white', fontSize: '1.3rem' }}
-                        />
-                      </span>
+                    <div
+                      id="myDropdown"
+                      className="dropdown-content"
+                      onBlur={this.collapse}
+                      tabIndex="0"
+                    >
+                      <Cart />
                     </div>
-                  </button>
-
-                  <div
-                    id="myDropdown"
-                    className="dropdown-content"
-                    onBlur={this.collapse}
-                    tabIndex="0"
-                  >
-                    <Cart />
                   </div>
-                </div>
+                </li>
               </ul>
             </div>
           </div>

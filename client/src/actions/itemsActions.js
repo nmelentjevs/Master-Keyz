@@ -24,7 +24,6 @@ export const getCurrentUserItems = email => dispatch => {
   axios
     .get(`/api/items/${email}`)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: GET_USER_ITEMS,
         payload: res.data

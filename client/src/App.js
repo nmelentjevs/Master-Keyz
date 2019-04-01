@@ -12,7 +12,7 @@ import {
 import { Provider } from 'react-redux';
 import store from './store.js';
 
-import './App.css';
+import './App.scss';
 
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
@@ -20,6 +20,8 @@ import Footer from './components/layout/Footer';
 import Login from './components/user/Login';
 import Register from './components/user/Register';
 import Account from './components/layout/Account';
+import ThankYou from './components/helpers/ThankYou';
+import Collection from './components/layout/Collection';
 
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -48,19 +50,23 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
+            <Navbar />
             <div className="container">
-              <Navbar />
-              <Route
-                exact
-                path="/login"
-                component={Login}
-                keys={(googleClientID, googleClientSecret)}
-              />
-              <Route exact path="/account" component={Account} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/" component={Landing} />
-              <Footer />
+              <div className="wrapper">
+                <Route
+                  exact
+                  path="/login"
+                  component={Login}
+                  keys={(googleClientID, googleClientSecret)}
+                />
+                <Route exact path="/account" component={Account} />
+                <Route exact path="/thankyou" component={ThankYou} />
+                <Route exact path="/collection" component={Collection} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/" component={Landing} />
+              </div>
             </div>
+            <Footer />
           </div>
         </Router>
       </Provider>

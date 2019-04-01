@@ -33,6 +33,10 @@
   display: block;
 }
 
+.card-icon {
+  margin-top: 0.1rem;
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #ddd;
@@ -53,6 +57,7 @@
   outline: inherit;
   margin: 0;
   width: 100%;
+  margin-top: 0.4rem;
 }
 
 #cart .fa-stack[data-count]:after {

@@ -8,6 +8,7 @@ import { logoutUser, clearCurrentProfile } from '../../actions/authActions';
 import { getItems } from '../../actions/itemsActions';
 
 import Items from '../common/Items';
+import Img from 'react-image';
 
 class Landing extends Component {
   getItems = e => {
@@ -27,8 +28,14 @@ class Landing extends Component {
   render() {
     const { items } = this.props.items;
     return (
-      <div>
-        <Items items={items} />
+      <div className="main-container">
+        <div id="main">
+          <img
+            src={require('../../img/pTeE24g.jpg')}
+            width="100%"
+            height="500px"
+          />
+        </div>
       </div>
     );
   }

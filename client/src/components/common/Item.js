@@ -6,6 +6,7 @@ import { addItem, errorAdding } from '../../actions/cartActions';
 import { setButtonLoading } from '../../actions/paymentActions';
 import isEmpty from '../../validation/is-empty';
 import Moment from 'react-moment';
+import Img from 'react-image';
 
 class Item extends Component {
   constructor() {
@@ -43,21 +44,28 @@ class Item extends Component {
     const { name, artist, category, price } = this.props;
     const { purchaseDate } = this.props;
     return (
-      <div>
-        <h1>{name}</h1>
-        <h1>{artist}</h1>
-        <h1>{category}</h1>
-        <h1>{price}£</h1>
-        {purchaseDate === undefined ? null : (
-          <h3>
-            Purchased on: <Moment format="YYYY/MM/DD">{purchaseDate}</Moment>
-          </h3>
-        )}
-        {this.props.type === 'add' ? (
-          <button className="add-button" onClick={() => this.addToBasket()}>
-            Purchase
-          </button>
-        ) : null}
+      <div className="item-grid">
+        <Img
+          className="item-img"
+          width="20%"
+          src="https://media.istockphoto.com/photos/stairway-to-heaven-picture-id533367857"
+        />
+        <div className="item-info">
+          <h4> {name}</h4>
+          <h4>--By {artist}</h4>
+          <h4>Category: {category}</h4>
+          <h4>{price}£</h4>
+          {purchaseDate === undefined ? null : (
+            <h3>
+              Purchased on: <Moment format="YYYY/MM/DD">{purchaseDate}</Moment>
+            </h3>
+          )}
+          {this.props.type === 'add' ? (
+            <button className="add-button" onClick={() => this.addToBasket()}>
+              <span className="button-text">Purchase</span>
+            </button>
+          ) : null}
+        </div>
       </div>
     );
   }

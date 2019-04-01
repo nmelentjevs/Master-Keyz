@@ -4,7 +4,13 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer-content">
-        <span> &copy;masterkeyz</span>
+        <span>
+          {' '}
+          <div className="sign" style={{ display: 'inline-block' }}>
+            &copy;
+          </div>{' '}
+          masterkeyz
+        </span>
       </div>
     </footer>
   );

@@ -9,9 +9,9 @@ const SelectList = ({ name, value, error, info, onChange, options }) => {
     </option>
   ));
   return (
-    <div className="form-group">
+    <div className="form-group dropdown dropdown-dark">
       <select
-        className={classnames('form-control form-control-lg', {
+        className={classnames('form-control form-control-lg dropdown-select', {
           'is-invalid': error
         })}
         name={name}
