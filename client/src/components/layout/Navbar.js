@@ -25,6 +25,11 @@ class Navbar extends Component {
     document.getElementById('myDropdown').classList.remove('show');
   };
 
+  onItemClick = () => {
+    const toggle = document.getElementById('toggle');
+    toggle.checked = !toggle.checked;
+  };
+
   render() {
     const { isAuthenticated } = this.props.auth;
     const { basket } = this.props.cart;
@@ -46,17 +51,20 @@ class Navbar extends Component {
             </Link>
             <div className="nav-items">
               <ul className="nav-list-items">
-                <li className="nav-list-item">
+                <li onClick={this.onItemClick} className="nav-list-item">
                   <Link to="/collection">Collection</Link>
                 </li>
-                <li className="nav-list-item">
+                <li onClick={this.onItemClick} className="nav-list-item">
                   <Link to="/about">About</Link>
                 </li>
-                <li className="nav-list-item">
+                <li onClick={this.onItemClick} className="nav-list-item">
                   <Link to="/contact">Contact</Link>
                 </li>
                 {isAuthenticated ? (
-                  <li className="nav-list-item card-icon">
+                  <li
+                    onClick={this.onItemClick}
+                    className="nav-list-item card-icon"
+                  >
                     <Link to="/account">
                       <i
                         className="far fa-user"
@@ -68,7 +76,7 @@ class Navbar extends Component {
                     </Link>
                   </li>
                 ) : (
-                  <li className="nav-list-item">
+                  <li onClick={this.onItemClick} className="nav-list-item">
                     <Link to="/login">Login</Link>
                   </li>
                 )}

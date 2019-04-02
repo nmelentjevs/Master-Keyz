@@ -29,12 +29,7 @@ export const getCurrentUserItems = email => dispatch => {
         payload: res.data
       });
     })
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+    .catch(err => console.log(err));
 };
 
 export const addItems = data => {

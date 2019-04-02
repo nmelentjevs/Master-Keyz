@@ -9,6 +9,7 @@
 body {
   background: url('./img/background.jpg') no-repeat center center fixed;
   background-size: cover;
+  min-height: 100%;
 }
 
 .container {
@@ -19,22 +20,111 @@ body {
   margin-right: auto;
   margin-left: auto;
 }
+#account {
+  text-align: center;
+  justify-content: center;
+}
 
 .main-display {
-  font-size: 5rem;
+  font-size: 4rem;
   font-family: Cinzel;
   z-index: 900;
+  margin: auto;
+  color: white;
+  letter-spacing: 5px;
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 2s;
+  padding-top: 30%;
+  max-width: 500px;
+}
+
+.collection-link {
+  margin-top: 50px;
+  padding: 15px;
+  color: whitesmoke;
+  font-family: 'latoregular', arial;
+  font-size: 1.2rem;
+  display: inline-block;
+  border: 4px double goldenrod;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.collection-link-text {
+  text-decoration: none;
+  color: whitesmoke;
+  -webkit-transition: 0.1s all linear;
+  -moz-transition: 0.1s all linear;
+  -o-transition: 0.1s all linear;
+  transition: 0.1s all linear;
+}
+
+.collection-link:hover {
+  background: goldenrod;
   color: black;
-  position: absolute;
+}
+
+.gold {
+  color: goldenrod;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .container #main {
   height: 100%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: white;
+  background: black;
   min-height: 90vh;
+  text-align: center;
 }
 
 @media (min-width: 576px) {
@@ -153,12 +243,10 @@ section {
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  clear: both;
+  position: relative;
   height: 50px;
-  z-index: 100;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -199,10 +287,17 @@ button {
   margin-bottom: 50px;
 }
 
-@media (max-width: 766px) {
+@media (min-width: 501px) and (max-width: 766px) {
   .items-grid {
     display: grid;
     grid-template-columns: 1fr;
+  }
+  .user-items-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .panel .back {
+    line-height: 0rem;
   }
 }
 
@@ -228,6 +323,9 @@ button {
     display: flex;
     flex-direction: column;
   }
+  .main-display {
+    font-size: 3rem;
+  }
   .nav-logo {
     color: white;
     font-size: 2rem;
@@ -251,6 +349,7 @@ button {
   .nav-list-items {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   .nav-list-item {
     margin: 0;
@@ -276,5 +375,104 @@ button {
     + .navbar {
       display: block;
     }
+    // :not(:checked)
+  }
+}
+
+.login {
+  text-align: center;
+}
+
+.login-flex {
+  margin-top: 30%;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+// Input fields css
+.input {
+  // needs to be relative so the :focus span is positioned correctly
+  position: relative;
+  margin-top: 10px;
+  // bigger font size for demo purposes
+  font-size: 2rem;
+  // the border gradient
+  background: linear-gradient(21deg, goldenrod, gold);
+
+  // the width of the input border
+  padding: 1.5px;
+  padding-bottom: 0px;
+
+  margin-bottom: 5px;
+  height: 40px;
+
+  // we want inline fields by default
+  display: inline-block;
+
+  // we want rounded corners no matter the size of the field
+
+  // style of the actual input field
+  *:not(span) {
+    position: relative;
+    display: inherit;
+    border-radius: inherit;
+    margin: 0;
+    border: none;
+    outline: none;
+    padding: 0 0.325em;
+    z-index: 1; // needs to be above the :focus span
+
+    // summon fancy shadow styles when focussed
+    &:focus + span {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // we don't animate box-shadow directly as that can't be done on the GPU, only animate opacity and transform for high performance animations.
+  span {
+    transform: scale(0.993, 0.94); // scale it down just a little bit
+    transition: transform 0.5s, opacity 0.25s;
+    opacity: 0; // is hidden by default
+
+    position: absolute;
+    z-index: 0; // needs to be below the field (would block input otherwise)
+    margin: 4px; // a bit bigger than .input padding, this prevents background color pixels shining through
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    pointer-events: none; // this allows the user to click through this element, as the shadow is rather wide it might overlap with other fields and we don't want to block those.
+
+    // fancy shadow styles
+    box-shadow: inset 0 0 0 3px #fff, 0 0 0 4px #fff, 3px -3px 30px #1beabd,
+      -3px 3px 30px goldenrod;
+  }
+}
+
+input {
+  font-family: inherit;
+  line-height: inherit;
+  color: white;
+  min-width: 30em;
+  height: 95%;
+  background: black;
+  font-size: 1.2rem;
+}
+
+::placeholder {
+  color: white;
+}
+
+@media (min-width: 301px) and (max-width: 766px) {
+  input {
+    min-width: 0;
+    max-width: 10em;
+  }
+  .login-flex {
+    margin-top: 10%;
+    display: inline-flex;
+    flex-direction: column;
   }
 }

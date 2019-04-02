@@ -64,7 +64,11 @@ class Item extends Component {
         onMouseEnter={property === 'collection' ? this.handleHover : null}
         onMouseLeave={property === 'collection' ? this.handleHover : null}
       >
-        <div className="front item-grid">
+        <div
+          className={
+            property === 'user' ? 'front user-item-grid' : 'front item-grid'
+          }
+        >
           <div>
             <Img
               className="item-img"
@@ -74,19 +78,28 @@ class Item extends Component {
           </div>
           <div className="item-info">
             <button className={itemClass}>{category}</button>
-            <h4> {name}</h4>
-            <h4>--By {artist}</h4>
-            <h4>{price}£</h4>
+            <h4
+              style={
+                (name.length > 15) & (property === 'collection')
+                  ? { fontSize: '1.2rem' }
+                  : null
+              }
+            >
+              {' '}
+              {name}
+            </h4>
+            <h4 className="artist-name">--By {artist}</h4>
+            <h4 className="item-price">{price}£</h4>
             {this.props.type === 'add' ? (
               <span className="button-text" style={{ textStyle: 'uppercase' }}>
                 Hover For Info
               </span>
             ) : null}
             {purchaseDate === undefined ? null : (
-              <h3>
+              <h4>
                 Purchased on:{' '}
                 <Moment format="YYYY/MM/DD">{purchaseDate}</Moment>
-              </h3>
+              </h4>
             )}
           </div>
         </div>

@@ -14,9 +14,6 @@ class UserItems extends Component {
       dropdown: false
     };
   }
-  componentDidMount = () => {
-    this.props.getCurrentUserItems();
-  };
 
   render() {
     const { purchased, loading } = this.props.items;
@@ -32,14 +29,14 @@ class UserItems extends Component {
       itemContent = <Spinner />;
     } else {
       itemContent = (
-        <div className="items-grid">
+        <div className="user-items-grid">
           {unique.map(item => {
             return (
-              <div key={item._id} className="item">
+              <div key={item._id} className="user-item">
                 <Item
                   name={item.item.name}
                   artist={item.item.artist}
-                  category={item.item.category}
+                  category={'ok'}
                   price={item.item.price}
                   purchaseDate={item.purchaseDate}
                   id={item.item.id}
@@ -61,6 +58,7 @@ UserItems.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   items: state.items,
   errors: state.errors
 });

@@ -56,41 +56,51 @@ class Login extends Component {
 
     return (
       <div className="login">
-        <h1>Login</h1>
-        <form method="post" onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            required="required"
-            onChange={this.onChange}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required="required"
-            onChange={this.onChange}
-          />
-          <button type="submit" className="btn btn-primary btn-block btn-large">
-            Let me in.
-          </button>
-        </form>
+        <form className="login-flex" method="post" onSubmit={this.onSubmit}>
+          <h1 style={{ color: 'white' }}>Login</h1>
+          <span className="input">
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
+              required="required"
+              onChange={this.onChange}
+            />
+            <span />
+          </span>
+          <span className="input">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required="required"
+              onChange={this.onChange}
+            />
+            <span />
+          </span>
 
-        <GoogleLogin
-          clientId={googleClientID}
-          render={renderProps => (
-            <button
-              onClick={renderProps.onClick}
-              className="btn btn-primary btn-block btn-large"
-            >
-              Login with Google
-            </button>
-          )}
-          buttonText="Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-        />
+          <div
+            className="collection-link"
+            style={{ display: 'inline-block' }}
+            type="submit"
+            onClick={this.onSubmit}
+          >
+            Let me in.
+          </div>
+          <h4 style={{ color: 'white', marginTop: '40px' }}>Or</h4>
+          <GoogleLogin
+            style={{ display: 'inline-block' }}
+            clientId={googleClientID}
+            render={renderProps => (
+              <div onClick={renderProps.onClick} className="collection-link">
+                Login with Google
+              </div>
+            )}
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+          />
+        </form>
       </div>
     );
   }

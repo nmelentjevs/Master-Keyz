@@ -48,7 +48,38 @@ $pastel-purple: #e0bbe4;
   justify-content: center;
 }
 
+.user-items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3rem;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.user-item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.user-item {
+  padding: 10px;
+  max-width: 320px;
+  height: 200px;
+  margin: 1px;
+  background: black;
+  grid-row: span 1;
+  grid-column: span 1;
+  border: goldenrod 1px solid;
+}
+
 .item .item-img {
+  margin-top: 20px;
+  width: 125px;
+  height: 160px;
+  border-radius: 20px;
+}
+
+.user-item .item-img {
+  margin-top: 20px;
   width: 125px;
   height: 160px;
   border-radius: 20px;
@@ -64,6 +95,24 @@ $pastel-purple: #e0bbe4;
   letter-spacing: normal;
   color: white;
   font-size: 1.25rem;
+}
+
+.user-item .item-info {
+  display: grid;
+  font-family: Montserrat;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2;
+  margin-top: 1.3rem;
+  letter-spacing: normal;
+  color: white;
+  & .item-category {
+    display: none;
+  }
+  & .item-price {
+    display: none;
+  }
 }
 
 .item-category {
@@ -167,58 +216,31 @@ option {
 .add-button {
   background: transparent;
   border: solid 1px #f9ce19;
-  width: 6rem;
+  width: 80%;
   height: 2rem;
+  color: white;
+  margin: 20px auto;
+  display: block;
+
   &:hover {
     background: goldenrod;
+    color: black;
   }
 }
 
 // Small devices (landscape phones, 576px and up)
+
 @media (max-width: 766px) {
   .items-grid {
     display: grid;
     grid-template-columns: 1fr;
   }
-  .item {
-    padding: 10px;
-    max-width: 320px;
-    height: 193px;
-    background: #faebeb;
-    margin: 1px;
-    grid-row: span 1;
-    grid-column: span 1;
-  }
-
-  .item-grid {
+  .user-items-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .item .item-img {
-    width: 125px;
-    height: 160px;
-    border-radius: 20px;
-  }
-
-  .item .item-info {
-    display: grid;
-    font-family: Montserrat;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: left;
-    color: white;
-  }
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 767px) and (max-width: 991px) {
-  .items-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   .item {
     padding: 10px;
@@ -240,23 +262,48 @@ option {
     height: 160px;
     border-radius: 20px;
   }
+}
 
-  .item .item-info {
+// Medium devices (tablets, 768px and up)
+@media (min-width: 767px) and (max-width: 991px) {
+  .items-grid {
     display: grid;
-    font-family: Montserrat;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: left;
-    color: white;
+    grid-template-columns: 1fr 1fr;
+  }
+  .user-items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .item {
+    padding: 10px;
+    max-width: 300px;
+    height: 193px;
+    background: black;
+    margin: 1px;
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+
+  .item .item-img {
+    width: 125px;
+    height: 160px;
+    border-radius: 20px;
+  }
+  .panel .front {
+    width: 200px;
+  }
+  .panel {
+    width: 100px;
   }
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) and (max-width: 1199px) {
   .items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .user-items-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
@@ -326,6 +373,7 @@ option {
   position: absolute;
   top: 0;
   left: 0;
+  line-height: 2rem;
   z-index: 800;
   width: inherit;
   height: inherit;
@@ -403,10 +451,11 @@ option {
 }
 
 .backTitle {
+  margin-top: 20px;
   padding: 10px;
   color: white;
   font-family: 'latohairline', arial;
-  font-size: 16px;
+  font-size: 1.3rem;
   font-weight: bold;
 }
 
@@ -415,20 +464,19 @@ option {
   padding-top: 0;
   color: white;
   font-family: 'latoregular', arial;
-  font-size: 14px;
 }
 
 .backGoto {
   padding: 10px;
   padding-top: 0;
-  color: #06f;
+  color: pink;
   font-family: 'latoregular', arial;
-  font-size: 14px;
+  font-size: 1.2rem;
 }
 
 .backGoto a {
   text-decoration: none;
-  color: #06f;
+  color: pink;
   -webkit-transition: 0.1s all linear;
   -moz-transition: 0.1s all linear;
   -o-transition: 0.1s all linear;
@@ -438,4 +486,10 @@ option {
 .backGoto a:hover {
   text-decoration: underline;
   padding-left: 15px;
+}
+
+@media (min-width: 767px) and (max-width: 991px) {
+  .panel .back {
+    line-height: 1.45rem;
+  }
 }

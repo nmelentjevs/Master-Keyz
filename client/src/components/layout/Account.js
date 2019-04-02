@@ -20,9 +20,11 @@ class Account extends Component {
   render() {
     const { userItems } = this.props.items.purchased;
     return (
-      <div>
+      <div id="account">
         <UserItems items={userItems} />
-        <button onClick={this.onLogoutClick}>Logout</button>
+        <div className="collection-link" onClick={this.onLogoutClick}>
+          Logout
+        </div>
       </div>
     );
   }

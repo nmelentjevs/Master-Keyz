@@ -42,10 +42,6 @@ class Items extends Component {
     this.setState({ currentPage: num });
   }
 
-  setCurrentPage(num) {
-    this.setState({ currentPage: num });
-  }
-
   createPaginatedData = () => {
     const { items } = this.props.items;
     const pageSize = this.props.pageSize;
@@ -168,6 +164,7 @@ class Items extends Component {
                 <div className="item-wrap" key={item._id}>
                   <div key={item._id} className="item hover panel">
                     <Item
+                      key={item._id}
                       name={item.name}
                       artist={item.artist}
                       category={item.category}
