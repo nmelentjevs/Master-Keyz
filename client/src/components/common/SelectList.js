@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import './select.scss';
 
 const SelectList = ({ name, value, error, info, onChange, options }) => {
   const selectOptions = options.map(option => (
@@ -9,7 +10,7 @@ const SelectList = ({ name, value, error, info, onChange, options }) => {
     </option>
   ));
   return (
-    <div className="form-group dropdown dropdown-dark">
+    <div className="form-group dropdown dropdown-dark select">
       <select
         className={classnames('form-control form-control-lg dropdown-select', {
           'is-invalid': error
@@ -17,6 +18,7 @@ const SelectList = ({ name, value, error, info, onChange, options }) => {
         name={name}
         value={value}
         onChange={onChange}
+        id="slct"
       >
         {selectOptions}
       </select>

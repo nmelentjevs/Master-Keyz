@@ -56,6 +56,7 @@ class Item extends Component {
     const { name, artist, category, price } = this.props;
     const { purchaseDate } = this.props;
     const { property } = this.props;
+    const itemClass = `item-category ${'category-' + category.toLowerCase()}`;
     const btnClass = this.state.isHovered ? 'hover panel flip' : 'hover panel';
     return (
       <div
@@ -72,21 +73,21 @@ class Item extends Component {
             />
           </div>
           <div className="item-info">
+            <button className={itemClass}>{category}</button>
             <h4> {name}</h4>
             <h4>--By {artist}</h4>
-            <h4 className="item-category">{category}</h4>
             <h4>{price}£</h4>
+            {this.props.type === 'add' ? (
+              <span className="button-text" style={{ textStyle: 'uppercase' }}>
+                Hover For Info
+              </span>
+            ) : null}
             {purchaseDate === undefined ? null : (
               <h3>
                 Purchased on:{' '}
                 <Moment format="YYYY/MM/DD">{purchaseDate}</Moment>
               </h3>
             )}
-            {this.props.type === 'add' ? (
-              <span className="button-text" style={{ textStyle: 'uppercase' }}>
-                Hover For Info
-              </span>
-            ) : null}
           </div>
         </div>
         <div className="back">

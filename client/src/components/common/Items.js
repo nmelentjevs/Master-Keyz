@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './card.scss';
+import './pagination.scss';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getItems } from '../../actions/itemsActions';
@@ -23,9 +24,59 @@ class Items extends Component {
     this.setState({ otherFilter: e.target.value, ready: 1 });
   };
 
-  componentDidMount() {}
+  componentWillMount() {
+    const startingPage = this.props.startingPage ? this.props.startingPage : 1;
+    const { items } = this.props.items;
+    const pageSize = this.props.pageSize;
+    let pageCount = parseInt(items.length / pageSize);
+    if (items.length % pageSize > 0) {
+      pageCount++;
+    }
+    this.setState({
+      currentPage: startingPage,
+      pageCount: pageCount
+    });
+  }
+
+  setCurrentPage(num) {
+    this.setState({ currentPage: num });
+  }
+
+  setCurrentPage(num) {
+    this.setState({ currentPage: num });
+  }
+
+  createPaginatedData = () => {
+    const { items } = this.props.items;
+    const pageSize = this.props.pageSize;
+    const currentPage = this.state.currentPage;
+    const upperLimit = currentPage * pageSize;
+    const dataSlice = items.slice(upperLimit - pageSize, upperLimit);
+    return dataSlice;
+  };
+
+  createControls() {
+    let controls = [];
+    const pageCount = this.state.pageCount;
+    for (let i = 1; i <= pageCount; i++) {
+      const baseClassName = 'pagination-controls__button';
+      const activeClassName =
+        i === this.state.currentPage ? `${baseClassName}--active` : '';
+      controls.push(
+        <div
+          className={`${baseClassName} ${activeClassName}`}
+          onClick={() => this.setCurrentPage(i)}
+        >
+          {i}
+        </div>
+      );
+    }
+    return controls;
+  }
+
   render() {
-    const { items, loading } = this.props.items;
+    const { loading } = this.props.items;
+    const items = this.createPaginatedData();
     const { errors } = this.props;
     const { categoryFilter, otherFilter } = this.state;
     let itemContent;
@@ -124,12 +175,14 @@ class Items extends Component {
                       id={item._id}
                       type={'add'}
                       property={'collection'}
+                      className={item.category}
                     />
                   </div>
                 </div>
               );
             })}
           </div>
+          <div className="pagination-controls">{this.createControls()}</div>
         </div>
       );
     }
@@ -140,6 +193,11 @@ class Items extends Component {
 Items.propTypes = {
   getItems: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
+};
+
+Items.defaultProps = {
+  pageSize: 6,
+  startingPage: 1
 };
 
 const mapStateToProps = state => ({

@@ -7,7 +7,7 @@
 }
 
 body {
-  background: url('./img/Untitled-3.jpg') no-repeat center center fixed;
+  background: url('./img/background.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -18,6 +18,23 @@ body {
   margin-top: 1.25rem;
   margin-right: auto;
   margin-left: auto;
+}
+
+.main-display {
+  font-size: 5rem;
+  font-family: Cinzel;
+  z-index: 900;
+  color: black;
+  position: absolute;
+}
+
+.container #main {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: white;
+  min-height: 90vh;
 }
 
 @media (min-width: 576px) {
@@ -45,8 +62,9 @@ body {
 }
 
 .wrapper {
-  background: white;
+  background: black;
   min-height: 90vh;
+  border: 2px goldenrod solid;
 }
 
 .container-fluid {
@@ -64,7 +82,6 @@ nav {
 }
 
 .nav-logo {
-  color: white;
   font-size: 2rem;
   margin-left: 2rem;
   color: goldenrod;
@@ -166,8 +183,8 @@ button {
   font-stretch: normal;
   line-height: 1.2;
   letter-spacing: normal;
-  text-align: left;
-  color: #000000;
+  text-align: center;
+  color: black;
 }
 
 .add-button:hover {
@@ -175,14 +192,11 @@ button {
   background: white;
 }
 
-.container #main {
-  height: 100%;
-}
-
 .collection-items-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 766px) {

@@ -30,11 +30,7 @@ class Landing extends Component {
     return (
       <div className="main-container">
         <div id="main">
-          <img
-            src={require('../../img/pTeE24g.jpg')}
-            width="100%"
-            height="500px"
-          />
+          <h1 className="main-display">We Make Music Happen</h1>
         </div>
       </div>
     );
