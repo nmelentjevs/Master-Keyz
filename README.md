@@ -19,7 +19,7 @@ Prototype of an e-commerce website for selling music sheets. ReactJS, NodeJS, Ex
 
 ## Install
 
-    $ git clone https://github.com/nmelentjevs/masterkeyz.git
+    $ git clone https://github.com/nmelentjevs/MasterKeyz.git
     $ cd printfultest
     $ npm install
 
